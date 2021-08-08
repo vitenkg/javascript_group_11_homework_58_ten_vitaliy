@@ -1,8 +1,8 @@
 import './App.css';
-import ModalBuilder from "./Containers/ModalBuilder/ModalBuilder";
+import ModalBuilder from "./Container/ModalBuilder/ModalBuilder";
 
 const App = () => (
-    <ModalBuilder />
+    <ModalBuilder/>
 );
 
 export default App;
