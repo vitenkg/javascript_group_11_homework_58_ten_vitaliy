@@ -1,7 +1,7 @@
 import React from 'react';
 import './BackDrop.css';
 
-const BackDrop = ({show, onClick}) => (
+const BackDrop = ({show, onClick, }) => (
     show ? <div className="Backdrop" onClick={onClick}/> : null
 );
 
