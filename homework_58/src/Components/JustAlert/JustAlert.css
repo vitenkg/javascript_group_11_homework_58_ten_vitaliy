@@ -1,0 +1,14 @@
+.JustAlert {
+    position: fixed;
+    z-index: 555;
+    width: 50%;
+    background: white;
+    box-shadow: 1px 1px 1px black;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 20px;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%);
+}

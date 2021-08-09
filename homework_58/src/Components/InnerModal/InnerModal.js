@@ -9,17 +9,21 @@ const InnerModal = props => {
     ]
     return (
         <>
-            <button onClick={props.close} type="button" className="btn-close" aria-label="Close"> </button>
-            <h4>{props.textHeader}</h4>
-            <p>{props.textBody}</p>
-            {buttons.map(b=> (
-                <Button
-                    key={buttons.id}
-                    type={b.type}
-                    label={b.label}
-                    class={b.class}
-                    clicked={b.clicked}/>
-            ))}
+            <div>
+                <button onClick={props.close} type="button" className="btn-close" aria-label="Close"> </button>
+                <h4>{props.textHeader}</h4>
+                <p>{props.textBody}</p>
+            </div>
+            <div>
+                {buttons.map(b=> (
+                    <Button
+                        key={buttons.id}
+                        type={b.type}
+                        label={b.label}
+                        class={b.class}
+                        clicked={b.clicked}/>
+                ))}
+            </div>
         </>
     );
 };

@@ -1,10 +1,10 @@
 import React from 'react';
-import BackDrop from "../BackDrop/BackDrop";
+import './Alert.css';
 
-const Alert = props => {
+const Alert = ({children, dismiss, show, type}) => {
     let color;
     let textColor;
-    switch (props.type) {
+    switch (type) {
         case 'Primary':
             color = 'white';
             textColor = 'black';
@@ -26,19 +26,18 @@ const Alert = props => {
 
     return (
         <>
-            <BackDrop show={props.show}/>
             <div
-                className="Modal"
+                className="Alert"
+                onClick={dismiss}
                 style={{
-                    transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                    opacity: props.show ? '1' : '0',
-                    backgroundColor: color,
+                    transform: show ? 'translateY(0)' : 'translateY(-100vh)',
+                    opacity: show ? '1' : '0',
+                    background: color,
                 }}
-                onClick={props.close}
             >
                 <h4 style={{color: textColor}}>Alert</h4>
                 <p>
-                    {props.children}
+                    {children}
                 </p>
             </div>
         </>
