@@ -15,6 +15,8 @@ const ModalBuilder = () => {
         dismiss: false,
     });
 
+    let justAlert = null;
+
     const showModalHandle = () => {
         setModalShow(true);
     };
@@ -57,14 +59,12 @@ const ModalBuilder = () => {
         }))
     };
 
-    const closeJustAlert = () => {
-        justAlert = null;
-    }
+    const closeJustAlert = () => justAlert = null;
 
-    let justAlert = (
+    justAlert = (
         <JustAlert
             type="warning"
-            // dismiss={closeJustAlert}
+            dismiss={closeJustAlert}
         >
             Some typing text
         </JustAlert>

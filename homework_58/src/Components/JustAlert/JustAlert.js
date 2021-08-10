@@ -59,12 +59,12 @@ const JustAlert = ({children, dismiss, type}) => {
     );
 
     if (justClose) {
-        justAlertComponent = null
+        justAlertComponent = null;
+        justAlertComponentDismiss = null;
     }
 
     return (
         dismiss ? justAlertComponentDismiss : justAlertComponent
-
     );
 };
 
