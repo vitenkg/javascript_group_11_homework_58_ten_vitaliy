@@ -15,6 +15,8 @@ const ModalBuilder = () => {
         dismiss: false,
     });
 
+    const [justAlertShow, setJustAlertShow] = useState(true);
+
     let justAlert = null;
 
     const showModalHandle = () => {
@@ -59,16 +61,22 @@ const ModalBuilder = () => {
         }))
     };
 
-    const closeJustAlert = () => justAlert = null;
+    const closeJustAlert = () => {
+        setJustAlertShow(false)
+    };
 
-    justAlert = (
-        <JustAlert
-            type="warning"
-            dismiss={closeJustAlert}
-        >
-            Some typing text
-        </JustAlert>
-    );
+    if (justAlertShow) {
+        justAlert = (
+            <JustAlert
+                type="warning"
+                dismiss={closeJustAlert}
+            >
+                Some typing text
+            </JustAlert>
+        );
+    } else {
+        justAlert = null;
+    }
 
     return (
         <div>
@@ -120,10 +128,10 @@ const ModalBuilder = () => {
                         onChange={e => selectedHandleChange(e.target.value)}
                     >
                         <option value="open">Open this select menu</option>
-                        <option value="Primary">Primary</option>
-                        <option value="Success">Success</option>
-                        <option value="Danger">Danger</option>
-                        <option value="Warning">Warning</option>
+                        <option value="primary">Primary</option>
+                        <option value="success">Success</option>
+                        <option value="danger">Danger</option>
+                        <option value="warning">Warning</option>
                     </select>
                 </label>
                 <button type="submit" className="btn btn-secondary">OK</button>

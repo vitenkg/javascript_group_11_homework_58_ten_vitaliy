@@ -3,29 +3,7 @@ import './JustAlert.css';
 
 const JustAlert = ({children, dismiss, type}) => {
     const [justClose, setJustClose] = useState(false);
-
-    let justColor = '';
-    let justTextColor = '';
-    switch (type) {
-        case 'Primary':
-            justColor = 'white';
-            justTextColor = 'black';
-            break;
-        case 'Success':
-            justColor = 'lightgreen';
-            justTextColor = 'black';
-            break;
-        case 'Danger':
-            justColor = 'red';
-            justTextColor = 'white';
-            break;
-        case 'Warning':
-            justColor = 'yellow';
-            justTextColor = 'green';
-            break;
-        default:
-            justColor = 'white';
-    }
+    type = 'alert alert-' + type;
 
     const close = () => {
         setJustClose(true);
@@ -33,11 +11,10 @@ const JustAlert = ({children, dismiss, type}) => {
 
     let justAlertComponentDismiss = (
         <div
-            className="JustAlert"
-            style={{background: justColor, color: justTextColor}}
+            className={['JustAlert', type].join(' ')}
         >
             <button
-                onClick={close}
+                onClick={dismiss}
                 type="button"
                 className="btn-close"
                 aria-label="Close"
@@ -49,9 +26,8 @@ const JustAlert = ({children, dismiss, type}) => {
 
     let justAlertComponent = (
         <div
-            className="JustAlert"
+            className={['JustAlert', type].join(' ')}
             onClick={close}
-            style={{background: justColor, color: justTextColor}}
         >
             <h4>Alert</h4>
             <p>{children}</p>
