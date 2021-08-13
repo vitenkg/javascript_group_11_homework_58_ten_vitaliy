@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 
 class InputFilmList extends Component {
-    // constructor(props) {
-    //     super(props);
-    // };
-
-
 
     render() {
         return (
@@ -17,7 +12,7 @@ class InputFilmList extends Component {
                 <button type="submit">add</button>
             </form>
         );
-    }
+    };
 }
 
 export default InputFilmList;

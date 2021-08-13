@@ -11,10 +11,6 @@ class Notepad extends Component {
         inputForm: '',
     };
 
-    // constructor(props) {
-    //     super(props);
-    // }
-
     togglePostForm = e => {
         e.preventDefault();
         this.setState(prevState => (
@@ -44,6 +40,13 @@ class Notepad extends Component {
     };
 
     removeFilm = id => {this.setState({note: this.state.note.filter(film => film.id !== id)})};
+
+    shouldComponentUpdate(nextState) {
+        if (this.props.note !== nextState.note) {
+            return true
+        }
+        return false;
+    }
 
     render() {
         return (

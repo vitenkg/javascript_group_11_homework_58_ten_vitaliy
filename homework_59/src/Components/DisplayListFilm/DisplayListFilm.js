@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 
 class DisplayListFilm extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
     render() {
         return (
             <ul>
@@ -21,6 +18,6 @@ class DisplayListFilm extends Component {
             </ul>
         );
     };
-};
+}
 
 export default DisplayListFilm;
