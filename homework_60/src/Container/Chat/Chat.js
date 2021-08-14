@@ -39,7 +39,6 @@ const Chat = () => {
         fetchData().catch();
     }, []);
 
-
     return (
         <div className="Cont">
             <DisplayMessages

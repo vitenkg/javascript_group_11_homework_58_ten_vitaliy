@@ -1,0 +1,23 @@
+.WriteMessage {
+    position: fixed;
+    width: 40%;
+    bottom: 20px;
+    left: 30%;
+}
+
+.Owner {
+    align-self: flex-end;
+    background: #c9c9c9;
+}
+.Owner::after {
+    content: "";
+    position: absolute;
+    z-index: -10;
+    top: -10px;
+    right: -2px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 15px 15px 0;
+    border-color: transparent #6d787d transparent transparent;
+}
