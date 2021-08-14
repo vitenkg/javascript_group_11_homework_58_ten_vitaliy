@@ -13,16 +13,33 @@ const DisplayMessages = (props) => {
     return (
         <div className="ContainerMessages">
             <div className="Message">
-                {props.messages.map(mess => (
-                        <fieldset
-                            key={mess._id}
-                            className={['MessField Foreign', mess.id].join(' ')}
-                        >
-                            <legend>{mess.author}</legend>
-                            <p className="Mess">{mess.message}</p>
-                            <p className="Time">{dayjs(mess.datetime).format('DD-MMM HH:MM')}</p>
-                        </fieldset>
-                    )
+                {props.messages.map(mess => {
+                    if (mess.author === 'Writer') {
+                        return (
+                            <fieldset
+                                key={mess._id}
+                                className={['MessField Owner', mess.id].join(' ')}
+                            >
+                                <legend>{mess.author}</legend>
+                                <p className="Mess">{mess.message}</p>
+                                <p className="Time">{dayjs(mess.datetime).format('DD-MMM HH:mm')}</p>
+                            </fieldset>
+                        )
+                    } else {
+                        return (
+                            <fieldset
+                                key={mess._id}
+                                className={['MessField Foreign', mess.id].join(' ')}
+                            >
+                                <legend>{mess.author}</legend>
+                                <p className="Mess">{mess.message}</p>
+                                <p className="Time">{dayjs(mess.datetime).format('DD-MMM HH:mm')}</p>
+                            </fieldset>
+                        )
+                    }
+
+                }
+
                 )}
             </div>
             <div ref={messagesEndRef} />

@@ -1,12 +1,18 @@
 import React from 'react';
+import './InputMessage.css';
 
-const InputMessage = () => {
+const InputMessage = (props) => {
     return (
         <div className="WriteMessage">
-            <form>
+            <form onSubmit={props.onSubmitForm}>
                 <fieldset>
                     <legend>Отправить Сообщение</legend>
-                    <textarea rows="5" cols="85" name="text"/>
+                    <input
+                        id="InputPost"
+                        type="text"
+                        value={props.newMessage}
+                        onChange={props.onChangeInput}
+                    />
                     <button type="submit">Отправить</button>
                 </fieldset>
             </form>

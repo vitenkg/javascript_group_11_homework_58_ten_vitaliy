@@ -7,6 +7,7 @@ import axios from "axios";
 const Chat = () => {
     const [error, setError] = useState(null);
     const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState('');
 
     const url = 'http://146.185.154.90:8000/messages';
 
@@ -21,31 +22,71 @@ const Chat = () => {
                 setError('Error: ' + e.response.status);
             }
         }
-        fetchData().catch();
+        fetchData().catch(e => console.log(e));
     }, []);
 
     useEffect(() => {
         const fetchData = async () => {
-            // let lastMsg = messages[10].datetime;
-            let lastMsg = "2021-08-14T08:13:01.229Z";
-            const urlNewMsg = 'http://146.185.154.90:8000/messages?datetime=' + lastMsg;
-            const response = await axios.get(urlNewMsg);
-            console.log(response);
-            const post = response.data;
-            console.log(messages);
-            console.log(post);
-            setMessages([...messages, post]);
+            try {
+                if (messages.length !== 0) {
+                    let lastMsg = messages[messages.length - 1].datetime;
+                    console.log(lastMsg);
+                    // let lastMsg = "2021-08-14T08:13:01.229Z";
+                    const urlNewMsg = 'http://146.185.154.90:8000/messages?datetime=' + lastMsg;
+                    const response = await axios.get(urlNewMsg);
+                    const post = response.data;
+                    if (post.length > 0) {
+                        setMessages([...messages.concat(post)]);
+                    }
+                }
+            } catch (e) {
+                setError('Error: ' + e.response);
+                console.log(e.response);
+            }
         }
-        fetchData().catch();
-    }, []);
+
+        const interval = setInterval (()=> {
+            fetchData().catch(e => console.log(e));
+        }, 3000);
+
+        fetchData().catch(e => console.log(e));
+        return () => clearInterval(interval);
+    }, [messages]);
+
+    const inputSubmitForm = async (e) => {
+        e.preventDefault();
+        try {
+            const data = new URLSearchParams();
+            data.set('message', newMessage);
+            data.set('author', 'Writer');
+            await axios.post(url, data);
+            setNewMessage('');
+            setMessages([...messages]);
+        } catch (e) {
+            setError('Error send message: ' + e.response)
+        }
+
+    };
 
     return (
-        <div className="Cont">
-            <DisplayMessages
-                messages={messages}
-            />
-            <InputMessage/>
-        </div>
+        <>
+            {error && (
+                <div style={{padding: '10px', background: 'red', color: 'white'}}>
+                    {error}
+                </div>
+            )}
+            <div className="Cont">
+                <DisplayMessages
+                    messages={messages}
+                />
+                <InputMessage
+                    onSubmitForm={(e) => inputSubmitForm(e)}
+                    newMessage={newMessage}
+                    onChangeInput={e => setNewMessage(e.target.value)}
+                />
+            </div>
+        </>
+
     );
 };
 
