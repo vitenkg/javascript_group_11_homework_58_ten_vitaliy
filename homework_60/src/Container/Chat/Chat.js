@@ -3,6 +3,8 @@ import InputMessage from "../../Component/InputMessage/InputMessage";
 import DisplayMessages from "../../Component/DisplayMessages/DisplayMessages";
 import './Chat.css';
 import axios from "axios";
+import ring from '../../audio/u_edomlenie.mp3';
+
 
 const Chat = () => {
     const [error, setError] = useState(null);
@@ -27,16 +29,16 @@ const Chat = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            let lastMsg = messages[messages.length - 1].datetime;
+            const urlNewMsg = 'http://146.185.154.90:8000/messages?datetime=' + lastMsg;
+            const response = await axios.get(urlNewMsg);
             try {
                 if (messages.length !== 0) {
-                    let lastMsg = messages[messages.length - 1].datetime;
-                    console.log(lastMsg);
-                    // let lastMsg = "2021-08-14T08:13:01.229Z";
-                    const urlNewMsg = 'http://146.185.154.90:8000/messages?datetime=' + lastMsg;
-                    const response = await axios.get(urlNewMsg);
+                    const audio = new Audio(ring);
                     const post = response.data;
                     if (post.length > 0) {
                         setMessages([...messages.concat(post)]);
+                        await audio.play();
                     }
                 }
             } catch (e) {
